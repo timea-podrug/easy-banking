@@ -1,7 +1,13 @@
 # EasyBanking
 
 EasyBanking: Simplify your banking experience. Log in with username and PIN. Transfer money to other users, request loans, and manage your transactions effortlessly.
-![easy-banking_screenshot](https://github.com/timea-podrug/easy-banking/assets/108535463/93f165b7-28dc-448a-a9f8-b0e946d95aee)
+
+
+
+![easy-banking_screenshot](https://github.com/timea-podrug/easy-banking/assets/108535463/7fb25a07-89c2-4427-8bc7-7a633628b9f5)
+
+
+
 <!--
 ![EasyBanking_screenshot](https://github.com/timea-podrug/EasyBanking/assets/108535463/8d7f039c-122c-42a5-842c-220cbec4d33a)
 -->
