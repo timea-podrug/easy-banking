@@ -1,10 +1,10 @@
 :root {
-  --primary-color: #333333;
+  --primary-color: #f5f5f5;
   --secondary-light: #cccccc;
-  --secondary-dark: #666666;
+  --secondary-medium: #666666;
   --accent-color: #c0c0c0;
   --white: #ffffff;
-  --off-white: #f5f5f5;
+  --secondary-dark: #333333;
 }
 * {
   margin: 0;
@@ -19,7 +19,7 @@ html {
 
 body {
   font-family: 'Poppins', sans-serif;
-  color: var(--off-white);
+  color: var(--secondary-dark);
   background-color: var(--primary-color);
   height: 100vh;
   padding: 2rem;
@@ -35,7 +35,7 @@ nav {
 .welcome {
   font-size: 1.9rem;
   font-weight: 500;
-  color: var(--off-white);
+  color: var(--secondary-medium);
 }
 
 .logo {
@@ -55,9 +55,9 @@ nav {
   width: 12rem;
   border-radius: 10rem;
   margin-right: 1rem;
-  color: inherit;
-  background-color: var(--secondary-dark);
-  border: 1px solid var(--secondary-light);
+  color: var(--primary-color);
+  background-color: var(--secondary-medium);
+  border: 1px solid var(--secondary-dark);
   transition: all 0.3s;
 }
 
@@ -77,7 +77,7 @@ nav {
   color: inherit;
   cursor: pointer;
   transition: all 0.3s;
-  color: var(--off-white);
+  color: var(--secondary-dark);
 }
 
 .login__btn:hover,
@@ -85,7 +85,7 @@ nav {
 .btn--sort:hover,
 .btn--sort:focus {
   outline: none;
-  color: var(--secondary-dark);
+  color: var(--secondary-medium);
 }
 
 /* MAIN */
@@ -118,7 +118,7 @@ nav {
 
 .balance__date {
   font-size: 1.4rem;
-  color: var(--secondary-dark);
+  color: var(--secondary-medium);
 }
 
 .balance__value {
@@ -129,7 +129,7 @@ nav {
 /* MOVEMENTS */
 .movements {
   grid-row: 2 / span 3;
-  background-color: var(--secondary-light);
+  background-color: var(--secondary-medium);
   border-radius: 1rem;
   overflow: scroll;
 }
@@ -145,7 +145,7 @@ nav {
   font-size: 1.1rem;
   text-transform: uppercase;
   font-weight: 500;
-  color: var(--off-white);
+  color: var(--primary-color);
   padding: 0.1rem 1rem;
   border-radius: 10rem;
   margin-right: 2rem;
@@ -155,22 +155,22 @@ nav {
   font-size: 1.1rem;
   text-transform: uppercase;
   font-weight: 500;
-  color: var(--primary-color);
+  color: var(--secondary-light);
 }
 
 .movements__type--deposit {
   background-image: linear-gradient(
     to top left,
     var(--secondary-light),
-    var(--secondary-dark)
+    var(--secondary-medium)
   );
 }
 
 .movements__type--withdrawal {
   background-image: linear-gradient(
     to top left,
-    var(--secondary-dark),
-    var(--primary-color)
+    var(--secondary-medium),
+    var(--secondary-dark)
   );
 }
 
@@ -203,7 +203,7 @@ nav {
 
 .summary__value--in,
 .summary__value--interest {
-  color: var(--secondary-light);
+  color: var(--secondary-medium);
 }
 
 .summary__value--out {
@@ -217,7 +217,7 @@ nav {
   font-size: 1.3rem;
   font-weight: 500;
   cursor: pointer;
-  color: var(--off-white);
+  color: var(--secondary-dark);
 }
 
 /* OPERATIONS */
@@ -230,7 +230,7 @@ nav {
 .operation--transfer {
   background-image: linear-gradient(
     to top left,
-    var(--off-white),
+    var(--primary-color),
     var(--secondary-light)
   );
 }
@@ -238,15 +238,15 @@ nav {
 .operation--loan {
   background-image: linear-gradient(
     to top left,
-    var(--secondary-dark),
-    var(--secondary-light)
+    var(--secondary-light),
+    var(--secondary-medium)
   );
 }
 
 .operation--close {
   background-image: linear-gradient(
     to top left,
-    var(--primary-color),
+    var(--secondary-medium),
     var(--secondary-dark)
   );
 }
@@ -255,7 +255,7 @@ h2 {
   margin-bottom: 1.5rem;
   font-size: 1.7rem;
   font-weight: 600;
-  color: var(--primary-color);
+  color: var(--secondary-dark);
 }
 
 .form {
@@ -289,7 +289,7 @@ h2 {
 
 .form__input:focus {
   outline: none;
-  background-color: var(--off-white);
+  background-color: var(--secondary-dark);
 }
 
 .form__label {
@@ -308,7 +308,7 @@ h2 {
 
 .form__btn:focus {
   outline: none;
-  background-color: var(--off-white);
+  background-color: var(--secondary-dark);
 }
 
 .logout-timer {
