@@ -35,7 +35,7 @@ nav {
 .welcome {
   font-size: 1.9rem;
   font-weight: 500;
-  color: var(--secondary-medium);
+  color: var(--secondary-dark);
 }
 
 .logo {

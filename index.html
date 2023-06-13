@@ -89,17 +89,21 @@
 
       <!-- OPERATION: LOAN -->
       <div class="operation operation--loan">
-        <h2>Request loan</h2>
+        <h2 style="color: var(--secondary-light)">Request loan</h2>
         <form class="form form--loan">
           <input type="number" class="form__input form__input--loan-amount" />
           <button class="form__btn form__btn--loan">&rarr;</button>
-          <label class="form__label form__label--loan">Amount</label>
+          <label
+            class="form__label form__label--loan"
+            style="color: var(--secondary-light)"
+            >Amount</label
+          >
         </form>
       </div>
 
       <!-- OPERATION: CLOSE -->
       <div class="operation operation--close">
-        <h2>Close account</h2>
+        <h2 style="color: var(--primary-color)">Close account</h2>
         <form class="form form--close">
           <input type="text" class="form__input form__input--user" />
           <input
@@ -108,8 +112,12 @@
             class="form__input form__input--pin"
           />
           <button class="form__btn form__btn--close">&rarr;</button>
-          <label class="form__label">Confirm user</label>
-          <label class="form__label">Confirm PIN</label>
+          <label class="form__label" style="color: var(--primary-color)"
+            >Confirm user</label
+          >
+          <label class="form__label" style="color: var(--primary-color)"
+            >Confirm PIN</label
+          >
         </form>
       </div>
 
