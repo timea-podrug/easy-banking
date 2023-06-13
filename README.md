@@ -1,22 +1,24 @@
 # EasyBanking
 
-EasyBanking is a web application built with HTML, CSS, and JavaScript that provides users with a convenient and secure way to manage their finances. Users can log in, view their transactions, send money, request loans, and even delete their account.
+EasyBanking: Simplify your banking experience. Log in with username and PIN. Transfer money to other users, request loans, and manage your transactions effortlessly.
 
+![EasyBanking_screenshot](https://github.com/timea-podrug/EasyBanking/assets/108535463/8d7f039c-122c-42a5-842c-220cbec4d33a)
 
 ## Features
 
-- **User Authentication:** Users can create an account or log in to their existing account securely.
+- **User Authentication:** Users can log in using the username and pin
 - **Transaction History:** Users can view their transaction history to keep track of their financial activities.
-- **Money Transfer:** Users can transfer funds between their accounts or to other registered users.
-- **Loan Request:** Users can request loans by specifying the loan amount and repayment period.
+- **Money Transfer:** Users can transfer funds to other registered users.
+- **Loan Request:** Users can request loans by specifying the loan amount.
 - **Account Deletion:** Users have the option to delete their account if needed.
+- **Inactivity:** Users will be logged out of the accout after five minutes of inactivity.
 
 ## Installation
 
 1. Clone the repository:
 
    ```shell
-   git clone https://github.com/your-username/easy-banking.git
+   git clone https://github.com/timea-podrug/easy-banking.git
    ```
 
 2. Navigate to the project directory:
@@ -29,10 +31,19 @@ EasyBanking is a web application built with HTML, CSS, and JavaScript that provi
 
 ## Usage
 
-1. Create an account or log in using your existing credentials.
-2. Once logged in, you will be directed to your account dashboard.
-3. From the dashboard, you can perform various actions such as viewing transactions, sending money, requesting loans, and managing your account.
-4. If you wish to delete your account, you can find the option to do so in the account settings.
+1. Log in with four different possible accounts -
+   1. user : tp PIN : 1111
+   2. user : lt PIN : 2222
+   3. user : km PIN : 3333
+   4. user : td PIN : 4444
+   
+Usernames are first letters of users name and surname that you can see in the accout object in JavaScript file.
+
+2. Once logged in, you will be directed to the account dashboard.
+
+3. From the dashboard, you can perform various actions such as viewing transactions, sending money ( use usernames listed before ), requesting loans, and deleting your account.
+
+4. If you wish to delete the account just confirm entered username and pin.
 
 ## Contact
 
