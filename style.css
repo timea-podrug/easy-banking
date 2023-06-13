@@ -1,3 +1,11 @@
+:root {
+  --primary-color: #333333;
+  --secondary-light: #cccccc;
+  --secondary-dark: #666666;
+  --accent-color: #c0c0c0;
+  --white: #ffffff;
+  --off-white: #f5f5f5;
+}
 * {
   margin: 0;
   padding: 0;
@@ -11,8 +19,8 @@ html {
 
 body {
   font-family: 'Poppins', sans-serif;
-  color: #444;
-  background-color: #f3f3f3;
+  color: var(--off-white);
+  background-color: var(--primary-color);
   height: 100vh;
   padding: 2rem;
 }
@@ -27,6 +35,7 @@ nav {
 .welcome {
   font-size: 1.9rem;
   font-weight: 500;
+  color: var(--off-white);
 }
 
 .logo {
@@ -47,17 +56,18 @@ nav {
   border-radius: 10rem;
   margin-right: 1rem;
   color: inherit;
-  border: 1px solid #fff;
+  background-color: var(--secondary-dark);
+  border: 1px solid var(--secondary-light);
   transition: all 0.3s;
 }
 
 .login__input:focus {
   outline: none;
-  border: 1px solid #ccc;
+  border: 1px solid var(--accent-color);
 }
 
 .login__input::placeholder {
-  color: #bbb;
+  color: var(--secondary-light);
 }
 
 .login__btn {
@@ -67,6 +77,7 @@ nav {
   color: inherit;
   cursor: pointer;
   transition: all 0.3s;
+  color: var(--off-white);
 }
 
 .login__btn:hover,
@@ -74,7 +85,7 @@ nav {
 .btn--sort:hover,
 .btn--sort:focus {
   outline: none;
-  color: #777;
+  color: var(--secondary-dark);
 }
 
 /* MAIN */
@@ -107,7 +118,7 @@ nav {
 
 .balance__date {
   font-size: 1.4rem;
-  color: #888;
+  color: var(--secondary-dark);
 }
 
 .balance__value {
@@ -118,7 +129,7 @@ nav {
 /* MOVEMENTS */
 .movements {
   grid-row: 2 / span 3;
-  background-color: #fff;
+  background-color: var(--secondary-light);
   border-radius: 1rem;
   overflow: scroll;
 }
@@ -127,14 +138,14 @@ nav {
   padding: 2.25rem 4rem;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--accent-color);
 }
 
 .movements__type {
   font-size: 1.1rem;
   text-transform: uppercase;
   font-weight: 500;
-  color: #fff;
+  color: var(--off-white);
   padding: 0.1rem 1rem;
   border-radius: 10rem;
   margin-right: 2rem;
@@ -144,20 +155,29 @@ nav {
   font-size: 1.1rem;
   text-transform: uppercase;
   font-weight: 500;
-  color: #666;
+  color: var(--primary-color);
 }
 
 .movements__type--deposit {
-  background-image: linear-gradient(to top left, #39b385, #9be15d);
+  background-image: linear-gradient(
+    to top left,
+    var(--secondary-light),
+    var(--secondary-dark)
+  );
 }
 
 .movements__type--withdrawal {
-  background-image: linear-gradient(to top left, #e52a5a, #ff585f);
+  background-image: linear-gradient(
+    to top left,
+    var(--secondary-dark),
+    var(--primary-color)
+  );
 }
 
 .movements__value {
   font-size: 1.7rem;
   margin-left: auto;
+  color: var(--primary-color);
 }
 
 /* SUMMARY */
@@ -183,11 +203,11 @@ nav {
 
 .summary__value--in,
 .summary__value--interest {
-  color: #66c873;
+  color: var(--secondary-light);
 }
 
 .summary__value--out {
-  color: #f5465d;
+  color: var(--secondary-dark);
 }
 
 .btn--sort {
@@ -197,32 +217,45 @@ nav {
   font-size: 1.3rem;
   font-weight: 500;
   cursor: pointer;
+  color: var(--off-white);
 }
 
 /* OPERATIONS */
 .operation {
   border-radius: 1rem;
   padding: 3rem 4rem;
-  color: #333;
+  color: var(--secondary-dark);
 }
 
 .operation--transfer {
-  background-image: linear-gradient(to top left, #ffb003, #ffcb03);
+  background-image: linear-gradient(
+    to top left,
+    var(--off-white),
+    var(--secondary-light)
+  );
 }
 
 .operation--loan {
-  background-image: linear-gradient(to top left, #39b385, #9be15d);
+  background-image: linear-gradient(
+    to top left,
+    var(--secondary-dark),
+    var(--secondary-light)
+  );
 }
 
 .operation--close {
-  background-image: linear-gradient(to top left, #e52a5a, #ff585f);
+  background-image: linear-gradient(
+    to top left,
+    var(--primary-color),
+    var(--secondary-dark)
+  );
 }
 
 h2 {
   margin-bottom: 1.5rem;
   font-size: 1.7rem;
   font-weight: 600;
-  color: #333;
+  color: var(--primary-color);
 }
 
 .form {
@@ -244,11 +277,11 @@ h2 {
 .form__input {
   width: 100%;
   border: none;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: var(--accent-color);
   font-family: inherit;
   font-size: 1.5rem;
   text-align: center;
-  color: #333;
+  color: var(--primary-color);
   padding: 0.3rem 1rem;
   border-radius: 0.7rem;
   transition: all 0.3s;
@@ -256,7 +289,7 @@ h2 {
 
 .form__input:focus {
   outline: none;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: var(--off-white);
 }
 
 .form__label {
@@ -268,14 +301,14 @@ h2 {
   border: none;
   border-radius: 0.7rem;
   font-size: 1.8rem;
-  background-color: #fff;
+  background-color: var(--accent-color);
   cursor: pointer;
   transition: all 0.3s;
 }
 
 .form__btn:focus {
   outline: none;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: var(--off-white);
 }
 
 .logout-timer {
