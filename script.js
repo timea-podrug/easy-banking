@@ -110,7 +110,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 //FUNCTIONS
 
-const formatMovementDate = function (date) {
+const formatMovementDate = function (date, locale) {
   const calcDaysPassed = (date1, date2) =>
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
   const daysPassed = calcDaysPassed(new Date(), date);
@@ -119,12 +119,17 @@ const formatMovementDate = function (date) {
   if (daysPassed === 1) return 'Yesterday';
   if (daysPassed <= 7) return `${daysPassed} days ago`;
   else {
-    const day = `${date.getDate()}`.padStart(2, 0);
-    const month = `${date.getMonth() + 1}`.padStart(2, 0);
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
+    return new Intl.DateTimeFormat(locale).format(date);
   }
 };
+
+const formatCur = function (value, locale, currency) {
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: currency,
+  }).format(value);
+};
+
 // displayMovements deletes the example movements and then with a forEach method and a turnary operator checks if the movement is grater then 0 and depending on that sets it to deposit/withdrawal. In html variable i copy the html code and set dinamic values.
 const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
@@ -136,7 +141,8 @@ const displayMovements = function (acc, sort = false) {
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const date = new Date(acc.movementsDates[i]);
-    const displayDate = formatMovementDate(date);
+    const displayDate = formatMovementDate(date, acc.locale);
+    const formattedMov = formatCur(mov, acc.locale, acc.currency);
 
     const html = `
     <div class="movements__row">
@@ -144,7 +150,7 @@ const displayMovements = function (acc, sort = false) {
       i + 1
     } ${type}</div>
       <div class="movements__date">${displayDate}</div>
-      <div class="movements__value">${mov.toFixed(2)}</div>
+      <div class="movements__value">${formattedMov}</div>
     </div>
     `;
     // I use .insertAdjacentHTML - afterbegin so that the added elements show up on top of each other.
@@ -155,26 +161,27 @@ const displayMovements = function (acc, sort = false) {
 // calculating the balance off the account with reduce method - adding up all the deposits and withdrawals to a single value.
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, cur) => acc + cur, 0);
-  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
+
+  labelBalance.textContent = formatCur(acc.balance, acc.locale, acc.currency);
 };
 
 const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
+  labelSumIn.textContent = formatCur(incomes, acc.locale, acc.currency);
 
   const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(out).toFixed(2)}€`;
+  labelSumOut.textContent = formatCur(Math.abs(out), acc.locale, acc.currency);
 
   const interest = acc.movements
     .filter(mov => mov > 0)
     .map(mov => (mov * acc.interestRate) / 100)
     .filter(mov => mov >= 1)
     .reduce((acc, cur) => acc + cur, 0);
-  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
+  labelSumInterest.textContent = formatCur(interest, acc.locale, acc.currency);
 };
 
 //USERNAMES
@@ -198,9 +205,31 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+const startLogOutTimer = function () {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+
+    labelTimer.textContent = `${min}:${sec}`;
+
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = 'Log in to get started';
+      containerApp.style.opacity = 0;
+    }
+
+    time--;
+  };
+  let time = 300;
+
+  tick();
+  const timer = setInterval(tick, 1000);
+  return timer;
+};
+
 //LOGIN
 
-let currentAcccout;
+let currentAcccout, timer;
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
   //check if username is correct
@@ -210,21 +239,33 @@ btnLogin.addEventListener('click', function (e) {
   console.log(currentAcccout);
   //check if pin in correct and set text to a welcome message with user name
   if (currentAcccout?.pin === Number(inputLoginPin.value)) {
+    //sets the welcome message
     labelWelcome.textContent = `Welcome back ${
       currentAcccout.owner.split(' ')[0]
     }`;
     //display information and remove username and pin from being visible
     containerApp.style.opacity = 100;
-    //create current date and time
+    //sets date and time depending on users local data
     const now = new Date();
-    const day = `${now.getDate()}`.padStart(2, 0);
-    const month = `${now.getMonth() + 1}`.padStart(2, 0);
-    const year = now.getFullYear();
-    const hour = `${now.getHours()}`.padStart(2, 0);
-    const minutes = `${now.getMinutes()}`.padStart(2, 0);
-    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${minutes}`;
+    //how it will be formated
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric',
+    };
+    //sets date by the users locale variable defined in the object
+    labelDate.textContent = new Intl.DateTimeFormat(
+      currentAcccout.locale,
+      options
+    ).format(now);
+    //clears inputs
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
+    //checks if timer already exists and if it does it delets it so that we do not have two timers running at the same time
+    if (timer) clearInterval(timer);
+    timer = startLogOutTimer();
     //update user interface
     updateUI(currentAcccout);
   }
@@ -236,16 +277,23 @@ btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
   const amount = Math.floor(inputLoanAmount.value);
   if (amount > 0 && currentAcccout.movements.some(mov => mov >= amount * 0.1)) {
-    currentAcccout.movements.push(amount);
+    //sets a timeout so that when we request a loan it takes three seconds to get it
+    setTimeout(function () {
+      currentAcccout.movements.push(amount);
 
-    //add loan date
-    currentAcccout.movementsDates.push(new Date().toISOString());
+      //add loan date
+      currentAcccout.movementsDates.push(new Date().toISOString());
 
-    //update UI
-    updateUI(currentAcccout);
+      //update UI
+      updateUI(currentAcccout);
+
+      //Reset timer - I want the timer to reset if there is any activity(it is there to log out the user after five minutes of inactivity)
+      clearInterval(timer);
+      timer = startLogOutTimer();
+    }, 3000);
+    //clear input
+    inputLoanAmount.value = '';
   }
-  //clear input
-  inputLoanAmount.value = '';
 });
 
 //TRANSFERS
@@ -272,6 +320,9 @@ btnTransfer.addEventListener('click', function (e) {
     receiverAcc.movementsDates.push(new Date().toISOString());
     //update user interface
     updateUI(currentAcccout);
+    //Reset timer - I want the timer to reset if there is any activity(it is there to log out the user after five minutes of inactivity)
+    clearInterval(timer);
+    timer = startLogOutTimer();
   }
 });
 
